@@ -13,6 +13,7 @@ bluetoothd_SRC_FILES_19 := $(bluetoothd_SRC_FILES_18) \
 bluetoothd_SRC_FILES_20 := $(bluetoothd_SRC_FILES_19)
 bluetoothd_SRC_FILES_21 := $(bluetoothd_SRC_FILES_20)
 bluetoothd_SRC_FILES_22 := $(bluetoothd_SRC_FILES_21)
+bluetoothd_SRC_FILES_23 := $(bluetoothd_SRC_FILES_22)
 bluetoothd_SRC_FILES    := $(bluetoothd_SRC_FILES_$(PLATFORM_SDK_VERSION)) \
                            bt-io.c \
                            bt-proto.c \
