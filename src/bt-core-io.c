@@ -523,9 +523,15 @@ cleanup:
   cleanup_pdu_wbuf(wbuf);
 }
 
+#if ANDROID_VERSION >= 23
+static void
+pin_request_cb(bt_bdaddr_t* remote_bd_addr, bt_bdname_t* bd_name,
+               uint32_t cod, bool min_16_digit)
+#else
 static void
 pin_request_cb(bt_bdaddr_t* remote_bd_addr, bt_bdname_t* bd_name,
                uint32_t cod)
+#endif
 {
   struct pdu_wbuf* wbuf;
 
