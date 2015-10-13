@@ -1163,6 +1163,12 @@ cleanup:
   cleanup_pdu_wbuf(wbuf);
 }
 
+#if ANDROID_VERSION >=23
+static void
+client_track_adv_event_cb(btgatt_track_adv_info_t *p_track_adv_info)
+{
+}
+#else
 static void
 client_track_adv_event_cb(int client_if, int filt_index, int addr_type,
                           bt_bdaddr_t* bd_addr, int adv_state)
@@ -1194,6 +1200,7 @@ client_track_adv_event_cb(int client_if, int filt_index, int addr_type,
 cleanup:
   cleanup_pdu_wbuf(wbuf);
 }
+#endif
 #endif
 
 static void
@@ -2750,6 +2757,9 @@ err_create_pdu_wbuf:
 static bt_status_t
 opcode_client_scan_filter_param_setup(const struct pdu* cmd)
 {
+#if ANDROID_VERSION >= 23
+  return BT_STATUS_FAIL;
+#else
   long off;
   int32_t client_if, action, filt_index, feat_seln, list_logic_type,
           filt_logic_type, rssi_high_thres, rssi_low_thres, dely_mode,
@@ -2803,6 +2813,7 @@ opcode_client_scan_filter_param_setup(const struct pdu* cmd)
 err_btgatt_interface_client_scan_filter_param_setup:
   cleanup_pdu_wbuf(wbuf);
   return status;
+#endif
 }
 
 static bt_status_t
@@ -3051,6 +3062,9 @@ err_btgatt_interface_client_conn_parameter_update:
 static bt_status_t
 opcode_client_set_scan_parameters(const struct pdu* cmd)
 {
+#if ANDROID_VERSION >=23
+  return BT_STATUS_FAIL;
+#else
   int32_t interval, window;
   struct pdu_wbuf* wbuf;
   bt_status_t status;
@@ -3078,6 +3092,7 @@ opcode_client_set_scan_parameters(const struct pdu* cmd)
 err_btgatt_interface_client_set_scan_parameters:
   cleanup_pdu_wbuf(wbuf);
   return status;
+#endif
 }
 
 static bt_status_t
